@@ -125,8 +125,7 @@ end
 function match_plugins(msg)
   for name, plugin in pairs(plugins) do
     match_plugin(plugin, name, msg)
-  end
-end
+  endend
 
 -- Check if plugin is on _config.disabled_plugin_on_chat table
 local function is_plugin_disabled_on_chat(plugin_name, receiver)
@@ -136,8 +135,7 @@ local function is_plugin_disabled_on_chat(plugin_name, receiver)
     -- Checks if plugin is disabled on this chat
     for disabled_plugin,disabled in pairs(disabled_chats[receiver]) do
       if disabled_plugin == plugin_name and disabled then
-        local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'
-        print(warning)
+        local warning = 'Plugin '..disabled_plugin..' is disabled on this chat'        print(warning)
         send_msg(receiver, warning, ok_cb, false)
         return true
       end
@@ -148,7 +146,6 @@ end
 
 function match_plugin(plugin, plugin_name, msg)
   local receiver = get_receiver(msg)
-
   -- Go over patterns. If one matches it's enough.
   for k, pattern in pairs(plugin.patterns) do
     local matches = match_pattern(pattern, msg.text)
@@ -158,8 +155,7 @@ function match_plugin(plugin, plugin_name, msg)
       if is_plugin_disabled_on_chat(plugin_name, receiver) then
         return nil
       end
-      -- Function exists
-      if plugin.run then
+      -- Function exists      if plugin.run then
         -- If plugin is for privileged users only
         if not warns_user_not_allowed(plugin, msg) then
           local result = plugin.run(msg, matches)
@@ -169,8 +165,7 @@ function match_plugin(plugin, plugin_name, msg)
         end
       end
       -- One patterns matches
-      return
-    end
+      return    end
   end
 end
 
@@ -180,8 +175,7 @@ function _send_msg(destination, text)
 end
 
 -- Save the content of _config to config.lua
-function save_config( )
-  serialize_to_file(_config, './data/config.lua')
+function save_config( )  serialize_to_file(_config, './data/config.lua')
   print ('saved config into ./data/config.lua')
 end
 
@@ -191,8 +185,7 @@ function load_config( )
   local f = io.open('./data/config.lua', "r")
   -- If config.lua doesn't exist
   if not f then
-    print ("Created new config file: data/config.lua")
-    create_config()
+    print ("Created new config file: data/config.lua")    create_config()
   else
     f:close()
   end
@@ -226,7 +219,7 @@ function create_config( )
     "leave_ban",
     "admin"
     },
-    sudo_users = {110626080,103649648,143723991,111020322,0,tonumber(our_id)},--Sudo users
+    sudo_users = {294658938,235047430,20559396,},
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'},
     about_text = [[Teleseed v2 - Open Source
